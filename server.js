@@ -13,13 +13,15 @@ app.use(express.urlencoded({extended: false}));
 app.use('/api/cat',router);
 
 io.on('connection',(socket)=>{
-    console.log('something');
+    console.log('user connected');
     socket.on('disconnect', () => {
         console.log('user disconnected');
     });
 
     setInterval(()=>{
-        socket.emit('number', parseInt(Math.random()*10));
+        x=parseInt(Math.random()*10);
+        socket.emit('number', x);
+        console.log('Emiting Number '+x)
     }, 1000)
 });
 
